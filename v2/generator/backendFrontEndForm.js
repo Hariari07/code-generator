@@ -130,7 +130,7 @@ async function getById${tableName}(id) {
 // -----------------------
 // Exists
 // -----------------------
-async function ${tableName}Exists(id) {
+async function checkEmployeeCodeExists${tableName}(id) {
   const dbPool = getDatabaseConnection("${dbName}");
   const [rows] = await dbPool.query(
     "SELECT 1 FROM ${tableName} WHERE ${primaryKey}=?",
@@ -177,7 +177,7 @@ module.exports = {
   getAllPaginated${tableName},
   getAllPlain${tableName},
   getById${tableName},
-  ${tableName}Exists,
+  checkEmployeeCodeExists${tableName},
   insert${tableName},
   update${tableName}
 };
@@ -199,6 +199,11 @@ async function readAllPlain${tableName}() {
 
 async function readById${tableName}(id) {
   return model.getById${tableName}(id);
+}
+
+// Example of calling this function for checking name existence on update (excluding the current partyId)
+async function checkExistsData${tableName}(id) {
+  return await model.checkEmployeeCodeExists(id); // Returns true/false
 }
 
 async function create${tableName}(data) {
@@ -248,9 +253,24 @@ async function getById${tableName}(req, res) {
   res.json({ data });
 }
 
-async function create${tableName}(req, res) {
-  await service.create${tableName}(req.body);
-  res.status(201).json({ message: "success" });
+async function create${tableName}(req, res) {  
+   try {
+    const reqBody = req.body;
+    const { data } = reqBody;
+    const parsedData = JSON.parse(data);
+
+    const check = await service.checkExistsData${tableName}(parsedData.employeeCode);
+
+    if (check) {
+      return res.status(600).json({ error: "Employee Already Exists!" });
+    } else {
+      const id = await service.create${tableName}(req.body, req.file);
+      res.status(201).json({ message: "success" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+
 }
 
 async function update${tableName}(req, res) {
@@ -278,14 +298,18 @@ module.exports = {
   // ======================================================
   const routes = `const express = require("express");
 const controller = require("./${tableName}.controller");
+const multer = require('multer');
+// Set up multer for file upload (in memory storage)
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage }).single('file');
 const router = express.Router();
 
-router.post("/${tableName}/paginated", controller.getPaginated${tableName});
-router.get("/${tableName}/all", controller.getAllPlain${tableName});
-router.post("/${tableName}/single", controller.getById${tableName});
-router.post("/${tableName}/create", controller.create${tableName});
-router.post("/${tableName}/update", controller.update${tableName});
-router.get("/${tableName}/refno", controller.getRefNo${tableName});
+router.post("/paginated", controller.getPaginated${tableName});
+router.get(/all", controller.getAllPlain${tableName});
+router.post("/single", controller.getById${tableName});
+router.post("/create", controller.create${tableName});
+router.post("/update", controller.update${tableName});
+router.get("/refno", controller.getRefNo${tableName});
 
 module.exports = router;
 `;

@@ -1,35 +1,21 @@
 const model = require("./signup.model");
+const bcrypt = require("bcryptjs");
 
-// -----------------------
-async function getPaginatedsignup(page, size, sortField, sortOrder, filters) {
-  return model.getAllPaginatedsignup(page, size, sortField, sortOrder, filters);
+// Prepare finalData and insert
+async function createSignup(data) {
+  const recData = data.data || data;    
+
+  const finalData = {
+    idsignup: recData.idsignup,
+    branchName: recData.branchName.value || recData.branchName,
+    userName: recData.userName,
+    password: recData.password,
+    emailid: recData.emailid,
+    referalCode: recData.referalCode,
+    activeStatus: recData.activeStatus
+  };
+
+  return await model.insertSignup(finalData);
 }
 
-async function readAllPlainsignup() {
-  return model.getAllPlainsignup();
-}
-
-async function readByIdsignup(id) {
-  return model.getByIdsignup(id);
-}
-
-async function createsignup(data) {
-  return model.insertsignup(data);
-}
-
-async function modifysignup(id, data) {
-  return model.updatesignup(id, data);
-}
-
-async function getNextRefNosignup() {
-  return model.getRefNosignup();
-}
-
-module.exports = {
-  getPaginatedsignup,
-  readAllPlainsignup,
-  readByIdsignup,
-  createsignup,
-  modifysignup,
-  getNextRefNosignup
-};
+module.exports = { createSignup };

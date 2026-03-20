@@ -6,5 +6,7 @@
   "scripts": {
     "generate": "node generate.js"
   },
-  "dependencies": {}
+  "dependencies": {
+    "bcryptjs": "^3.0.3"
+  }
 }
