@@ -1,0 +1,73 @@
+[
+  {
+    "tableName": "signup",
+    "dbName": "hlmmasters",
+    "primaryKey": "id",
+    "fields": [
+      "idsignup",
+      "branchName",
+      "userName",
+      "password",
+      "emailid",
+      "referalCode",     
+      "activeStatus"
+    ],
+    "frontEndCommanUrl": "/register",
+    "frontend": {
+      "formName": "signupForm",
+      "columns": 1,
+      "fields": [
+        {
+          "fieldName": "idsignup",
+          "label": "Idsignup",
+          "type": "text",
+          "primengModule": "InputText",
+          "required": true
+        },
+        {
+          "fieldName": "branchName",
+          "label": "Branch Name",
+          "type": "text",
+          "primengModule": "Select",
+          "required": true,
+          "options": ["default"]
+        },
+        {
+          "fieldName": "userName",
+          "label": "User Name",
+          "type": "text",
+          "primengModule": "InputText",
+          "required": true
+        },
+        {
+          "fieldName": "password",
+          "label": "Password",
+          "type": "password",
+          "primengModule": "password",
+          "required": true
+        },
+        {
+          "fieldName": "emailid",
+          "label": "Emailid",
+          "type": "email",
+          "primengModule": "InputText",
+          "required": true
+        },
+        {
+          "fieldName": "referalCode",
+          "label": "Referal Code",
+          "type": "text",
+          "primengModule": "InputNumber",
+          "required": true
+        },
+        {
+          "fieldName": "activeStatus",
+          "label": "Active Status",
+          "type": "text",
+          "primengModule": "InputText",
+          "required": true
+        }
+      ]
+    }
+  }
+]

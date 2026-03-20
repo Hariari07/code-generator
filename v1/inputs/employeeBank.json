@@ -1,0 +1,14 @@
+{
+  "formName": "employeeBankForm",
+  "fields": [
+    { "fieldName": "employeeCode", "type": "number", "label": "Employee Code", "required": true, "primengModule": "InputNumber" },
+    { "fieldName": "accountHolderName", "type": "text", "label": "Account Holder Name", "required": true, "primengModule": "InputText" },
+    { "fieldName": "bankName", "type": "text", "label": "Bank Name", "required": true, "primengModule": "InputText" },
+    { "fieldName": "branchName", "type": "text", "label": "Branch Name", "required": false, "primengModule": "InputText" },
+    { "fieldName": "accountNumber", "type": "text", "label": "Account Number", "required": true, "primengModule": "InputText" },
+    { "fieldName": "ifscCode", "type": "text", "label": "IFSC Code", "required": true, "primengModule": "InputText" },
+    { "fieldName": "upiId", "type": "text", "label": "UPI ID", "required": false, "primengModule": "InputText" },
+    { "fieldName": "bankStatus", "type": "select", "label": "Bank Status", "required": true, "primengModule": "Dropdown", "options": ["Active","Inactive"] }
+  ],
+  "coloumns": 1
+}

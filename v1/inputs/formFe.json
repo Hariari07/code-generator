@@ -1,0 +1,19 @@
+{
+  "formName": "employeeForm",
+  "fields": [
+    { "fieldName": "employeeCode", "type": "number", "label": "Employee Code", "required": true, "primengModule": "InputNumber" },
+    { "fieldName": "name", "type": "text", "label": "Name", "required": true, "primengModule": "InputText" },
+    { "fieldName": "gender", "type": "select", "label": "Gender", "required": true, "primengModule": "Select", "options": ["Male","Female","Other"] },
+    { "fieldName": "dob", "type": "date", "label": "Date of Birth", "required": false, "primengModule": "DatePicker" },
+    { "fieldName": "bloodGroup", "type": "text", "label": "Blood Group", "required": false, "primengModule": "InputText" },
+    { "fieldName": "emailId", "type": "email", "label": "Email", "required": true, "primengModule": "InputText" },
+    { "fieldName": "contact", "type": "number", "label": "Contact No", "required": true, "primengModule": "InputText" },
+    { "fieldName": "emergencyContact", "type": "number", "label": "Emergency Contact", "required": false, "primengModule": "InputText" },
+    { "fieldName": "doj", "type": "date", "label": "Date of Joining", "required": false, "primengModule": "DatePicker" },
+    { "fieldName": "designation", "type": "text", "label": "Designation", "required": false, "primengModule": "InputText" },
+    { "fieldName": "department", "type": "text", "label": "Department", "required": false, "primengModule": "InputText" },
+    { "fieldName": "workingStatus", "type": "select", "label": "Working Status", "required": false, "primengModule": "Select", "options": ["Active","Inactive","Resigned"] },
+    { "fieldName": "dateOfResigned", "type": "date", "label": "Date of Resigned", "required": false, "primengModule": "DatePicker" }
+  ],
+  "coloumns": 2
+}

@@ -1,0 +1,14 @@
+{
+  "formName": "employeeAddForm",
+  "fields": [
+    { "fieldName": "employeeCode", "type": "number", "label": "Employee Code", "required": true, "primengModule": "InputNumber" },
+    { "fieldName": "addressType", "type": "text", "label": "Address Type", "required": true, "primengModule": "InputText" },
+    { "fieldName": "addressLine1", "type": "textarea", "label": "Address Line 1", "required": true, "primengModule": "Textarea", "rows": 2, "cols": 30, "style": "resize: none" },
+    { "fieldName": "addressLine2", "type": "textarea", "label": "Address Line 2", "required": true, "primengModule": "Textarea", "rows": 2, "cols": 30, "style": "resize: none" },
+    { "fieldName": "city", "type": "text", "label": "City", "required": true, "primengModule": "InputText" },
+    { "fieldName": "state", "type": "text", "label": "State", "required": false, "primengModule": "InputText" },
+    { "fieldName": "pinCode", "type": "text", "label": "Pin Code", "required": false, "primengModule": "InputText" },
+    { "fieldName": "country", "type": "text", "label": "Country", "required": false, "primengModule": "InputText" }
+  ],
+  "coloumns": 2
+}

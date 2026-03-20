@@ -1,0 +1,73 @@
+<form [formGroup]="signupForm">
+<div class="grid">
+  <div class="col">
+    <div class="mb-2">
+      <p-iftalabel>
+        <input type="text" class="w-full" pInputText id="idsignup" formControlName="idsignup" />
+        <label class="iftalabelSize" for="idsignup">Idsignup</label>
+      </p-iftalabel>
+    </div>
+    <div class="mb-2">
+      <p-iftalabel>
+        <p-select  [(ngModel)]="selectedbranchName" inputId="branchName" [options]="branchNameOptions" placeholder="Select" optionLabel="label" class="w-full" formControlName="branchName" appendTo="body"></p-select>
+        <label class="iftalabelSize" for="branchName">Branch Name</label>
+      </p-iftalabel>
+    </div>
+    <div class="mb-2">
+      <p-iftalabel>
+        <input type="text" class="w-full" pInputText id="userName" formControlName="userName" />
+        <label class="iftalabelSize" for="userName">User Name</label>
+      </p-iftalabel>
+    </div>
+    <div class="mb-2">
+      <p-iftalabel>
+<p-password formControlName="password" inputStyleClass="w-full" styleClass="w-full"></p-password>
+        <label class="iftalabelSize" for="password">Password</label>
+      </p-iftalabel>
+    </div>
+    <div class="mb-2">
+      <p-iftalabel>
+        <input type="text" class="w-full" pInputText id="emailid" formControlName="emailid" />
+        <label class="iftalabelSize" for="emailid">Emailid</label>
+      </p-iftalabel>
+    </div>
+    <div class="mb-2">
+      <p-iftalabel>
+        <input type="text" class="w-full" pInputText id="referalCode" formControlName="referalCode" />
+        <label class="iftalabelSize" for="referalCode">Referal Code</label>
+      </p-iftalabel>
+    </div>
+    <div class="mb-2">
+      <p-iftalabel>
+        <input type="text" class="w-full" pInputText id="activeStatus" formControlName="activeStatus" />
+        <label class="iftalabelSize" for="activeStatus">Active Status</label>
+      </p-iftalabel>
+    </div>
+  </div>
+</form>
+
+    <div class="flex justify-content-between">
+          <div class="flex flex-wrap gap-2 justify-content-start">
+            <p-button label="Apply" [disabled]="!isBtnDisabledsignup" severity="warn" icon="pi pi-check-circle"
+              (onClick)="applysignup()" />
+
+            @if (isEditablesignup) {
+            <p-button label="Update" [disabled]="isBtnDisabledsignup" icon="pi pi-save" (onClick)="editsignup()" />
+            }
+            @if (!isEditablesignup) {
+            <p-button label="Save" [disabled]="isBtnDisabledsignup" icon="pi pi-save" (onClick)="savesignup()" />
+            }
+            <p-button label="Roll Back" [disabled]="isRollBack" icon="pi pi-refresh" (onClick)="rollBacksignup()"
+              styleClass="p-button-info" />
+            @if (!isEditablesignup) {
+            <p-button label="Reset" icon="pi pi-undo" (onClick)="resetsignup()" severity="danger" />
+            }
+            @if (workFlowEnabled) {
+            <p-button label="Re-Approval" icon="pi  pi-refresh" [styleClass]="'cusButton'" severity="danger"
+              (onClick)="reApproveBasic()" [disabled]="selectedStage !== 2" />
+            }
+          </div>
+        </div>
+
+
+    

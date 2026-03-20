@@ -1,0 +1,59 @@
+<form [formGroup]="employeeAddressForm">
+<div class="grid">
+  <div class="col">
+    <div class="mb-2">
+      <p-iftalabel>
+        <input type="number" class="w-full" pInputText id="employeeCode" formControlName="employeeCode" [pattern]="patterns" />
+        <label class="iftalabelSize" for="employeeCode">Employee Code</label>
+      </p-iftalabel>
+    </div>
+    <div class="mb-2">
+      <p-iftalabel>
+        <input type="text" class="w-full" pInputText id="addressType" formControlName="addressType" />
+        <label class="iftalabelSize" for="addressType">Address Type</label>
+      </p-iftalabel>
+    </div>
+    <div class="mb-2">
+      <p-iftalabel>
+        <input type="text" class="w-full" pInputText id="addressLine1" formControlName="addressLine1" />
+        <label class="iftalabelSize" for="addressLine1">Address Line1</label>
+      </p-iftalabel>
+    </div>
+    <div class="mb-2">
+      <p-iftalabel>
+        <input type="text" class="w-full" pInputText id="addressLine2" formControlName="addressLine2" />
+        <label class="iftalabelSize" for="addressLine2">Address Line2</label>
+      </p-iftalabel>
+    </div>
+  </div>
+  <div class="col">
+    <div class="mb-2">
+      <p-iftalabel>
+        <input type="text" class="w-full" pInputText id="city" formControlName="city" />
+        <label class="iftalabelSize" for="city">City</label>
+      </p-iftalabel>
+    </div>
+    <div class="mb-2">
+      <p-iftalabel>
+        <input type="text" class="w-full" pInputText id="state" formControlName="state" />
+        <label class="iftalabelSize" for="state">State</label>
+      </p-iftalabel>
+    </div>
+    <div class="mb-2">
+      <p-iftalabel>
+        <input type="number" class="w-full" pInputText id="pinCode" formControlName="pinCode" [pattern]="patterns" />
+        <label class="iftalabelSize" for="pinCode">Pin Code</label>
+      </p-iftalabel>
+    </div>
+    <div class="mb-2">
+      <p-iftalabel>
+        <input type="text" class="w-full" pInputText id="country" formControlName="country" />
+        <label class="iftalabelSize" for="country">Country</label>
+      </p-iftalabel>
+    </div>
+  </div>
+</div>
+  <div class="flex justify-content-end gap-2 mt-4">
+    <button pButton type="submit" label="Submit" [disabled]="employeeAddressForm.invalid"></button>
+  </div>
+</form>

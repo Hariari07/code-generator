@@ -1,0 +1,107 @@
+<form [formGroup]="employeesForm">
+<div class="grid">
+  <div class="col">
+    <div class="mb-2">
+      <p-iftalabel>
+        <input type="number" class="w-full" pInputText id="employeeCode" formControlName="employeeCode" [pattern]="patterns" />
+        <label class="iftalabelSize" for="employeeCode">Employee Code</label>
+      </p-iftalabel>
+    </div>
+    <div class="mb-2">
+      <p-iftalabel>
+        <input type="text" class="w-full" pInputText id="name" formControlName="name" />
+        <label class="iftalabelSize" for="name">Name</label>
+      </p-iftalabel>
+    </div>
+    <div class="mb-2">
+      <p-iftalabel>
+        <p-select  [(ngModel)]="selectedgender" inputId="gender" [options]="genderOptions" placeholder="Select" optionLabel="label" class="w-full" formControlName="gender"></p-select>
+        <label class="iftalabelSize" for="gender">Gender</label>
+      </p-iftalabel>
+    </div>
+    <div class="mb-2">
+      <p-iftalabel>
+         <p-datepicker id="dob" formControlName="dob" [showIcon]="true" appendTo="body"/>
+        <label class="iftalabelSize" for="dob">Date of Birth</label>
+      </p-iftalabel>
+    </div>
+    <div class="mb-2">
+      <p-iftalabel>
+        <input type="text" class="w-full" pInputText id="bloodGroup" formControlName="bloodGroup" />
+        <label class="iftalabelSize" for="bloodGroup">Blood Group</label>
+      </p-iftalabel>
+    </div>
+    <div class="mb-2">
+      <p-iftalabel>
+        <p-multiSelect [(ngModel)]="selectedmotherTongue" inputId="motherTongue" [options]="motherTongueOptions" placeholder="Select" optionLabel="label" class="w-full" formControlName="motherTongue"></p-multiSelect>
+        <label class="iftalabelSize" for="motherTongue">Mother Tongue</label>
+      </p-iftalabel>
+    </div>
+    <div class="mb-2">
+      <p-iftalabel>
+        <p-multiSelect [(ngModel)]="selectedreadingLanguage" inputId="readingLanguage" [options]="readingLanguageOptions" placeholder="Select" optionLabel="label" class="w-full" formControlName="readingLanguage"></p-multiSelect>
+        <label class="iftalabelSize" for="readingLanguage">Reading Language</label>
+      </p-iftalabel>
+    </div>
+    <div class="mb-2">
+      <p-iftalabel>
+        <p-multiSelect [(ngModel)]="selectedspeakingLanguage" inputId="speakingLanguage" [options]="speakingLanguageOptions" placeholder="Select" optionLabel="label" class="w-full" formControlName="speakingLanguage"></p-multiSelect>
+        <label class="iftalabelSize" for="speakingLanguage">Speaking Language</label>
+      </p-iftalabel>
+    </div>
+  </div>
+  <div class="col">
+    <div class="mb-2">
+      <p-iftalabel>
+        <input type="text" class="w-full" pInputText id="emailId" formControlName="emailId" />
+        <label class="iftalabelSize" for="emailId">Email Id</label>
+      </p-iftalabel>
+    </div>
+    <div class="mb-2">
+      <p-iftalabel>
+        <input type="number" class="w-full" pInputText id="contact" formControlName="contact" [pattern]="patterns" />
+        <label class="iftalabelSize" for="contact">Contact</label>
+      </p-iftalabel>
+    </div>
+    <div class="mb-2">
+      <p-iftalabel>
+        <input type="number" class="w-full" pInputText id="emergencyContact" formControlName="emergencyContact" [pattern]="patterns" />
+        <label class="iftalabelSize" for="emergencyContact">Emergency Contact</label>
+      </p-iftalabel>
+    </div>
+    <div class="mb-2">
+      <p-iftalabel>
+         <p-datepicker id="doj" formControlName="doj" [showIcon]="true" appendTo="body"/>
+        <label class="iftalabelSize" for="doj">Date of Joining</label>
+      </p-iftalabel>
+    </div>
+    <div class="mb-2">
+      <p-iftalabel>
+        <p-select  [(ngModel)]="selecteddesignation" inputId="designation" [options]="designationOptions" placeholder="Select" optionLabel="label" class="w-full" formControlName="designation"></p-select>
+        <label class="iftalabelSize" for="designation">Designation</label>
+      </p-iftalabel>
+    </div>
+    <div class="mb-2">
+      <p-iftalabel>
+        <p-select  [(ngModel)]="selecteddepartment" inputId="department" [options]="departmentOptions" placeholder="Select" optionLabel="label" class="w-full" formControlName="department"></p-select>
+        <label class="iftalabelSize" for="department">Department</label>
+      </p-iftalabel>
+    </div>
+    <div class="mb-2">
+      <p-iftalabel>
+        <p-select  [(ngModel)]="selectedworkingStatus" inputId="workingStatus" [options]="workingStatusOptions" placeholder="Select" optionLabel="label" class="w-full" formControlName="workingStatus"></p-select>
+        <label class="iftalabelSize" for="workingStatus">Working Status</label>
+      </p-iftalabel>
+    </div>
+    <div class="mb-2">
+      <p-iftalabel>
+         <p-datepicker id="dateOfExit" formControlName="dateOfExit" [showIcon]="true" appendTo="body"/>
+        <label class="iftalabelSize" for="dateOfExit">Date Of Exit</label>
+      </p-iftalabel>
+    </div>
+  </div>
+</div>
+  <div class="flex justify-content-end gap-2 mt-4">
+    <button pButton type="submit" label="Submit" [disabled]="employeesForm.invalid"></button>
+  </div>
+</form>

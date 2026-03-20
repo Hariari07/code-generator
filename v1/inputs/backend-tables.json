@@ -1,0 +1,53 @@
+[
+  {
+    "tableName": "employees",
+    "dbName": "hlmmasters",
+    "primaryKey": "id",
+    "fields": [
+      "id",
+      "employeeCode",
+      "employeePhoto",
+      "name",
+      "gender",
+      "dob",
+      "bloodGroup",
+      "motherTongue",
+      "readingLanguage",
+      "speakingLanguage",
+      "emailId",
+      "contact",
+      "emergencyContact",
+      "doj",
+      "designation",
+      "department",
+      "workingStatus",
+      "dateOfExit",
+      "preparedBy",
+      "preparedAt",
+      "approvedBy",
+      "approvedAt",
+      "stage"
+    ]
+  },
+  {
+    "tableName": "customer_master",
+    "dbName": "hlmmasters",
+    "primaryKey": "id",
+    "fields": [
+      "id",
+      "category",
+      "partyName",
+      "contactPerson",
+      "mobileNo",
+      "phoneNo",
+      "emailId",
+      "isMailSendActive",
+      "dept",
+      "preparedBy",
+      "approvedBy",
+      "approvalStatus",
+      "isActive",
+      "isStage"
+    ]
+  }
+]

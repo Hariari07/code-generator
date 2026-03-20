@@ -1,0 +1,75 @@
+{
+  "entity": "employeesBasic",
+  "columns": [
+    {
+      "name": "employeeCode",
+      "label": "Employee Code",
+      "type": "text",
+      "sortable": true,
+      "filterable": true
+    },
+    {
+      "name": "name",
+      "label": "Name",
+      "type": "text",
+      "sortable": true,
+      "filterable": true
+    },
+    {
+      "name": "gender",
+      "label": "Gender",
+      "type": "text",
+      "sortable": true,
+      "filterable": true
+    },
+    {
+      "name": "doj",
+      "label": "Joining Date",
+      "type": "date",
+      "sortable": true,
+      "filterable": true
+    },
+    {
+      "name": "doj",
+      "label": "Joining Month",
+      "type": "date",
+      "sortable": true,
+      "filterable": true
+    },
+    {
+      "name": "doj",
+      "label": "Joining Year",
+      "type": "date",
+      "sortable": true,
+      "filterable": true
+    },
+    {
+      "name": "designation",
+      "label": "Designation",
+      "type": "text",
+      "sortable": true,
+      "filterable": true
+    },
+    {
+      "name": "department",
+      "label": "Department",
+      "type": "text",
+      "sortable": true,
+      "filterable": true
+    },
+    {
+      "name": "workingStatus",
+      "label": "Working Status",
+      "type": "text",
+      "sortable": true,
+      "filterable": true
+    },
+    {
+      "name": "dateOfExit",
+      "label": "Date of Exit",
+      "type": "date",
+      "sortable": true,
+      "filterable": false      
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+[
+  {
+    "tableName": "employees",
+    "dbName": "hlmmasters",
+    "primaryKey": "id",
+    "fields": [
+      "id",
+      "employeeCode",
+      "employeePhoto",
+      "name",
+      "gender",
+      "dob",
+      "bloodGroup",
+      "motherTongue",
+      "readingLanguage",
+      "speakingLanguage",
+      "emailId",
+      "contact",
+      "emergencyContact",
+      "doj",
+      "designation",
+      "department",
+      "workingStatus",
+      "dateOfExit",
+      "preparedBy",
+      "preparedAt",
+      "approvedBy",
+      "approvedAt",
+      "stage"
+    ],
+    "frontend": {
+      "formName": "employeesForm",
+      "columns": 2,
+      "fields": [
+        {
+          "fieldName": "employeeCode",
+          "label": "Employee Code",
+          "type": "number",
+          "primengModule": "InputNumber",
+          "required": true
+        },        
+        {
+          "fieldName": "name",
+          "label": "Name",
+          "type": "text",
+          "primengModule": "InputText",
+          "required": true
+        },
+        {
+          "fieldName": "gender",
+          "label": "Gender",
+          "type": "text",
+          "primengModule": "Select",
+          "required": true, "options": ["Male", "Female", "Other"]
+        },
+        {
+          "fieldName": "dob",
+          "label": "Date of Birth",
+          "type": "date",
+          "primengModule": "DatePicker",
+          "required": true
+        },
+        {
+          "fieldName": "bloodGroup",
+          "label": "Blood Group",
+          "type": "text",
+          "primengModule": "InputText",
+          "required": false
+        },
+        {
+          "fieldName": "motherTongue",
+          "label": "Mother Tongue",
+          "type": "text",
+          "primengModule": "multiselect",
+          "required": true, "options": ["Tamil", "English", "Kannada"]
+        },
+        {
+          "fieldName": "readingLanguage",
+          "label": "Reading Language",
+          "type": "text",
+          "primengModule": "multiselect",
+          "required": true, "options": ["Tamil", "English", "Kannada"]
+        },
+        {
+          "fieldName": "speakingLanguage",
+          "label": "Speaking Language",
+          "type": "text",
+          "primengModule": "multiselect",
+          "required": true, "options": ["Tamil", "English", "Kannada"]
+        },
+        {
+          "fieldName": "emailId",
+          "label": "Email Id",
+          "type": "text",
+          "primengModule": "InputText",
+          "required": true
+        },
+        {
+          "fieldName": "contact",
+          "label": "Contact",
+          "type": "number",
+          "primengModule": "InputNumber",
+          "required": true
+        },
+        {
+          "fieldName": "emergencyContact",
+          "label": "Emergency Contact",
+          "type": "number",
+          "primengModule": "InputNumber",
+          "required": false
+        },
+        {
+          "fieldName": "doj",
+          "label": "Date of Joining",
+          "type": "date",
+          "primengModule": "DatePicker",
+          "required": true
+        },
+        {
+          "fieldName": "designation",
+          "label": "Designation",
+          "type": "text",
+          "primengModule": "Select",
+          "required": true, "options": ["HR", "IT", "Sales"]
+        },
+        {
+          "fieldName": "department",
+          "label": "Department",
+          "type": "text",
+          "primengModule": "Select",
+          "required": true, "options": ["Executive", "Sr.Executive", "Manager"]
+        },
+        {
+          "fieldName": "workingStatus",
+          "label": "Working Status",
+          "type": "text",
+          "primengModule": "Select",
+          "required": true, "options": ["Active", "In-Active", "Resigned"]
+        },
+        {
+          "fieldName": "dateOfExit",
+          "label": "Date Of Exit",
+          "type": "date",
+          "primengModule": "DatePicker",
+          "required": false
+        }
+      ]
+    }
+  }
+]

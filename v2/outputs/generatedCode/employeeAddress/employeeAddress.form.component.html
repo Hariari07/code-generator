@@ -1,0 +1,81 @@
+<form [formGroup]="employeeAddressForm">
+<div class="grid">
+  <div class="col">
+    <div class="mb-2">
+      <p-iftalabel>
+        <input type="number" class="w-full" pInputText id="employeeCode" formControlName="employeeCode" [pattern]="patterns" />
+        <label class="iftalabelSize" for="employeeCode">Employee Code</label>
+      </p-iftalabel>
+    </div>
+    <div class="mb-2">
+      <p-iftalabel>
+        <p-select  [(ngModel)]="selectedaddressType" inputId="addressType" [options]="addressTypeOptions" placeholder="Select" optionLabel="label" class="w-full" formControlName="addressType" appendTo="body"></p-select>
+        <label class="iftalabelSize" for="addressType">Address Type</label>
+      </p-iftalabel>
+    </div>
+    <div class="mb-2">
+      <p-iftalabel>
+        <input type="text" class="w-full" pInputText id="addressLine1" formControlName="addressLine1" />
+        <label class="iftalabelSize" for="addressLine1">Address Line1</label>
+      </p-iftalabel>
+    </div>
+    <div class="mb-2">
+      <p-iftalabel>
+        <input type="text" class="w-full" pInputText id="addressLine2" formControlName="addressLine2" />
+        <label class="iftalabelSize" for="addressLine2">Address Line2</label>
+      </p-iftalabel>
+    </div>
+  </div>
+  <div class="col">
+    <div class="mb-2">
+      <p-iftalabel>
+        <input type="text" class="w-full" pInputText id="city" formControlName="city" />
+        <label class="iftalabelSize" for="city">City</label>
+      </p-iftalabel>
+    </div>
+    <div class="mb-2">
+      <p-iftalabel>
+        <input type="text" class="w-full" pInputText id="state" formControlName="state" />
+        <label class="iftalabelSize" for="state">State</label>
+      </p-iftalabel>
+    </div>
+    <div class="mb-2">
+      <p-iftalabel>
+        <input type="number" class="w-full" pInputText id="pinCode" formControlName="pinCode" [pattern]="patterns" />
+        <label class="iftalabelSize" for="pinCode">Pin Code</label>
+      </p-iftalabel>
+    </div>
+    <div class="mb-2">
+      <p-iftalabel>
+        <p-select  [(ngModel)]="selectedcountry" inputId="country" [options]="countryOptions" placeholder="Select" optionLabel="label" class="w-full" formControlName="country" appendTo="body"></p-select>
+        <label class="iftalabelSize" for="country">Country</label>
+      </p-iftalabel>
+    </div>
+  </div>
+</form>
+
+    <div class="flex justify-content-between">
+          <div class="flex flex-wrap gap-2 justify-content-start">
+            <p-button label="Apply" [disabled]="!isBtnDisabledemployeeAddress" severity="warn" icon="pi pi-check-circle"
+              (onClick)="applyemployeeAddress()" />
+
+            @if (isEditableemployeeAddress) {
+            <p-button label="Update" [disabled]="isBtnDisabledemployeeAddress" icon="pi pi-save" (onClick)="editemployeeAddress()" />
+            }
+            @if (!isEditableemployeeAddress) {
+            <p-button label="Save" [disabled]="isBtnDisabledemployeeAddress" icon="pi pi-save" (onClick)="saveemployeeAddress()" />
+            }
+            <p-button label="Roll Back" [disabled]="isRollBack" icon="pi pi-refresh" (onClick)="rollBackemployeeAddress()"
+              styleClass="p-button-info" />
+            @if (!isEditableemployeeAddress) {
+            <p-button label="Reset" icon="pi pi-undo" (onClick)="resetemployeeAddress()" severity="danger" />
+            }
+            @if (workFlowEnabled) {
+            <p-button label="Re-Approval" icon="pi  pi-refresh" [styleClass]="'cusButton'" severity="danger"
+              (onClick)="reApproveBasic()" [disabled]="selectedStage !== 2" />
+            }
+          </div>
+        </div>
+
+
+    

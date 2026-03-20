@@ -1,0 +1,103 @@
+<p-table #tables [value]="masterData" styleClass="p-datatable-gridlines p-datatable-striped" [scrollable]="true"
+          scrollHeight="45rem" [rowHover]="true" [loading]="isLoading" [filterDelay]="1">
+  <ng-template pTemplate="header">
+      <th pSortableColumn="employeeCode">
+        <div class="flex justify-content-between align-items-center">
+          Employee Code
+          <p-sortIcon field="employeeCode"></p-sortIcon>
+          <p-columnFilter type="text" field="employeeCode" display="menu" class="ml-auto"></p-columnFilter>
+        </div>
+      </th>
+      <th pSortableColumn="name">
+        <div class="flex justify-content-between align-items-center">
+          Name
+          <p-sortIcon field="name"></p-sortIcon>
+          <p-columnFilter type="text" field="name" display="menu" class="ml-auto"></p-columnFilter>
+        </div>
+      </th>
+      <th pSortableColumn="gender">
+        <div class="flex justify-content-between align-items-center">
+          Gender
+          <p-sortIcon field="gender"></p-sortIcon>
+          <p-columnFilter type="text" field="gender" display="menu" class="ml-auto"></p-columnFilter>
+        </div>
+      </th>
+      <th pSortableColumn="doj">
+        <div class="flex justify-content-between align-items-center">
+          Joining Date
+          <p-sortIcon field="doj"></p-sortIcon>
+          <p-columnFilter type="date" field="doj" display="menu" class="ml-auto"></p-columnFilter>
+        </div>
+      </th>
+      <th pSortableColumn="doj">
+        <div class="flex justify-content-between align-items-center">
+          Joining Month
+          <p-sortIcon field="doj"></p-sortIcon>
+          <p-columnFilter type="date" field="doj" display="menu" class="ml-auto"></p-columnFilter>
+        </div>
+      </th>
+      <th pSortableColumn="doj">
+        <div class="flex justify-content-between align-items-center">
+          Joining Year
+          <p-sortIcon field="doj"></p-sortIcon>
+          <p-columnFilter type="date" field="doj" display="menu" class="ml-auto"></p-columnFilter>
+        </div>
+      </th>
+      <th pSortableColumn="designation">
+        <div class="flex justify-content-between align-items-center">
+          Designation
+          <p-sortIcon field="designation"></p-sortIcon>
+          <p-columnFilter type="text" field="designation" display="menu" class="ml-auto"></p-columnFilter>
+        </div>
+      </th>
+      <th pSortableColumn="department">
+        <div class="flex justify-content-between align-items-center">
+          Department
+          <p-sortIcon field="department"></p-sortIcon>
+          <p-columnFilter type="text" field="department" display="menu" class="ml-auto"></p-columnFilter>
+        </div>
+      </th>
+      <th pSortableColumn="workingStatus">
+        <div class="flex justify-content-between align-items-center">
+          Working Status
+          <p-sortIcon field="workingStatus"></p-sortIcon>
+          <p-columnFilter type="text" field="workingStatus" display="menu" class="ml-auto"></p-columnFilter>
+        </div>
+      </th>
+      <th pSortableColumn="dateOfExit">
+        <div class="flex justify-content-between align-items-center">
+          Date of Exit
+          <p-sortIcon field="dateOfExit"></p-sortIcon>
+        </div>
+      </th>
+      <th>
+        <div class="flex justify-content-between align-items-center">
+          Action
+        </div>
+      </th>
+
+    <!-- <th>
+        <div class="flex justify-content-between align-items-center">
+          Status
+        </div>
+      </th> -->
+  </ng-template>
+
+  <ng-template pTemplate="body" let-row>
+    <tr>
+      <td>{{row.employeeCode}}</td>
+      <td>{{row.name}}</td>
+      <td>{{row.gender}}</td>
+      <td>{{row.doj}}</td>
+      <td>{{row.doj}}</td>
+      <td>{{row.doj}}</td>
+      <td>{{row.designation}}</td>
+      <td>{{row.department}}</td>
+      <td>{{row.workingStatus}}</td>
+      <td>{{row.dateOfExit}}</td>
+      <td>
+                <p-button label="EDIT" icon="pi pi-pencil" iconPos="left" severity="warn" (click)="modify(row)"></p-button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
