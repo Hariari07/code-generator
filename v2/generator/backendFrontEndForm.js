@@ -371,6 +371,7 @@ module.exports = router;
         html += `        <label class="iftalabelSize" for="${f.fieldName}">${f.label}</label>\n      </p-iftalabel>\n    </div>\n`;
       });
       html += `  </div>\n`;
+      html += `  </div>\n`;
     }
     html += `</form>\n`;
 
@@ -475,7 +476,8 @@ module.exports = router;
     
     //  Data Var
     seqData: any[] = [];
-    
+    isLoading: boolean = false;
+    ${tableName}Refno: any;
     refNo${tableName}: any;
     editRefNo${tableName}: any;
 
@@ -485,6 +487,10 @@ module.exports = router;
     jbTittleSave${tableName}: any;
     jbTittleEdit${tableName}: any;
     dbTittle${tableName}: any;
+
+    // Validator Pattern
+    patterns = "^[0-9_-]{10,12}";
+
 
     // Boolean Var
     // Main page loading Progress Bar
@@ -526,21 +532,20 @@ module.exports = router;
       
     }
     
-    async startUp() {
+
+
+      async startUp() {
     try {
       // Fetch the data sequentially
       this.seqData = await this.service.seqRun();
       // Load Data
       this.${tableName}Refno = await this.seqData[0].data;
-      this.${tableName}Data = await this.seqData[1].data;
-     
-      } else {
-        this.isLoading = true;
-      }
-    } catch (error) {
-      console.error('Error loading data:', error);
-    }
-    }
+      this.${tableName}Data = await this.seqData[1].data;     
+  } catch(error: any) {
+    console.error('Error loading data:', error);
+  }
+
+  }
 
     // Button Functions
     async apply${tableName}(){
@@ -577,8 +582,8 @@ module.exports = router;
     }
 
     // Submit Functions
-    insert${tableName}(payload){
-      await this.service.insert${tableName}(payLoad).subscribe({
+    async insert${tableName}(payload: any){
+      await this.service.insert${tableName}(payload).subscribe({
       next: async (response: any) => {
         if (response.message == "success") {
           await this.messageService.add({ severity: 'success', summary: 'success', detail: 'None Created Successfully!', life: 8000 });
@@ -589,7 +594,7 @@ module.exports = router;
      });
     }
 
-    update${tableName}(id, payload){
+    async update${tableName}(id, payload){
       await this.service.update${tableName}(payLoad).subscribe({
       next: async (response: any) => {
         if (response.message == "success") {
@@ -653,7 +658,7 @@ module.exports = router;
     }
 
     async jbInsert${tableName}(justify: any){
-      const payLoad = {
+      const payload = {
         id: ,
         data: ,
         empData: empData,

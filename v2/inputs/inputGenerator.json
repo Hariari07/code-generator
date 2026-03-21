@@ -1,49 +1,105 @@
 [
   {
-    "tableName": "signup",
+    "tableName": "userProfile",
     "dbName": "hlmmasters",
     "primaryKey": "id",
     "fields": [
-      "idsignup",
-      "branchName",
-      "userName",
-      "password",
+      "userId",
+      "companyName",
+      "address1",
+      "address2",
+      "city",
+      "state",
+      "country",
+      "pinCode",
+      "latitude",
+      "longitude",
+      "contactNo",
       "emailid",
-      "referalCode",     
-      "activeStatus"
+      "currencyCode",
+      "profileImageUrl"
     ],
-    "frontEndCommanUrl": "/register",
+    "frontEndCommanUrl": "/hr/master/emp",
     "frontend": {
-      "formName": "signupForm",
+      "formName": "userProfileForm",
       "columns": 1,
       "fields": [
         {
-          "fieldName": "idsignup",
-          "label": "Idsignup",
+          "fieldName": "userId",
+          "label": "User Id",
+          "type": "number",
+          "primengModule": "InputNumber",
+          "required": true
+        },
+        {
+          "fieldName": "companyName",
+          "label": "Company Name",
           "type": "text",
           "primengModule": "InputText",
           "required": true
         },
         {
-          "fieldName": "branchName",
-          "label": "Branch Name",
+          "fieldName": "address1",
+          "label": "Address1",
+          "type": "text",
+          "primengModule": "InputText",
+          "required": true
+        },
+        {
+          "fieldName": "address2",
+          "label": "Address2",
+          "type": "text",
+          "primengModule": "InputText",
+          "required": true
+        },
+        {
+          "fieldName": "city",
+          "label": "City",
+          "type": "text",
+          "primengModule": "InputText",
+          "required": true
+        },
+        {
+          "fieldName": "state",
+          "label": "State",
+          "type": "text",
+          "primengModule": "InputText",
+          "required": true
+        },
+        {
+          "fieldName": "country",
+          "label": "Country",
           "type": "text",
           "primengModule": "Select",
           "required": true,
           "options": ["default"]
         },
         {
-          "fieldName": "userName",
-          "label": "User Name",
+          "fieldName": "pinCode",
+          "label": "Pin Code",
+          "type": "number",
+          "primengModule": "InputNumber",
+          "required": true
+        },
+        {
+          "fieldName": "latitude",
+          "label": "Latitude",
           "type": "text",
           "primengModule": "InputText",
           "required": true
         },
         {
-          "fieldName": "password",
-          "label": "Password",
-          "type": "password",
-          "primengModule": "password",
+          "fieldName": "longitude",
+          "label": "Longitude",
+          "type": "text",
+          "primengModule": "InputText",
+          "required": true
+        },
+        {
+          "fieldName": "contactNo",
+          "label": "Contact No",
+          "type": "number",
+          "primengModule": "InputNumber",
           "required": true
         },
         {
@@ -54,15 +110,15 @@
           "required": true
         },
         {
-          "fieldName": "referalCode",
-          "label": "Referal Code",
-          "type": "text",
+          "fieldName": "currencyCode",
+          "label": "Currency Code",
+          "type": "number",
           "primengModule": "InputNumber",
           "required": true
         },
         {
-          "fieldName": "activeStatus",
-          "label": "Active Status",
+          "fieldName": "profileImageUrl",
+          "label": "Profile Image Url",
           "type": "text",
           "primengModule": "InputText",
           "required": true

@@ -1,7 +1,0 @@
-const express = require("express");
-const controller = require("./signup.controller");
-const router = express.Router();
-
-router.post("/create", controller.createSignup);
-
-module.exports = router;
