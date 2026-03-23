@@ -26,12 +26,32 @@ tables.forEach((tbl) => {
   // -----------------------
   const modelContent = `const getDatabaseConnection = require("../../../config/db");
 
-async function insert${capitalize(tableName)}(data) {
-  const dbPool = getDatabaseConnection("${dbName}");
-  const values = [${modelFields.map(f => `data.${f}`).join(", ")}];
-  const query = "INSERT INTO ${tableName} (${modelFields.join(", ")}) VALUES (?)";
-  const [result] = await dbPool.query(query, [values]);
-  return result.insertId;
+
+async function insertUserProfile(data) {
+    try {
+      	
+	const dbPool = getDatabaseConnection("${dbName}");
+  	const values = [${modelFields.map(f => `data.${f}`).join(", ")}];
+  	const query = "INSERT INTO ${tableName} (${modelFields.join(", ")}) VALUES (?)";
+  	const [result] = await dbPool.query(query, [values]);
+
+
+        return {
+            success: true,
+            insertId: result.insertId,
+            message: "User profile inserted successfully"
+        };
+
+    } catch (error) {
+        console.error("Insert Error:", error);
+
+        return {
+            success: false,
+            insertId: null,
+            message: "Failed to insert user profile",
+            error: error.message
+        };
+    }
 }
 
 module.exports = { insert${capitalize(tableName)} };
@@ -49,10 +69,10 @@ async function create${capitalize(tableName)}(data) {
   const recData = data.data || data;    
 
   const finalData = {
-    ${modelFields.map(f => {      
-      if (f.includes("branchName")) return `${f}: recData.${f}.value || recData.${f}`;
-      return `${f}: recData.${f}`;
-    }).join(",\n    ")}
+    ${modelFields.map(f => {
+    if (f.includes("branchName")) return `${f}: recData.${f}.value || recData.${f}`;
+    return `${f}: recData.${f}`;
+  }).join(",\n    ")}
   };
 
   return await model.insert${capitalize(tableName)}(finalData);

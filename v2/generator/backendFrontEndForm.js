@@ -142,12 +142,32 @@ async function checkEmployeeCodeExists${tableName}(id) {
 // -----------------------
 // Insert
 // -----------------------
-async function insert${tableName}(data) {
-  const dbPool = getDatabaseConnection("${dbName}");
-  const q = \`INSERT INTO ${tableName} (${fields.join(",")}) VALUES (?)\`;
-  const values = [${fields.map(f => `data.${f}`).join(",")}];
-  const [result] = await dbPool.query(q, [values]);
-  return result.insertId;
+
+async function insertUserProfile(data) {
+    try {
+      	
+	const dbPool = getDatabaseConnection("${dbName}");
+  	const values = [${modelFields.map(f => `data.${f}`).join(", ")}];
+  	const query = "INSERT INTO ${tableName} (${modelFields.join(", ")}) VALUES (?)";
+  	const [result] = await dbPool.query(query, [values]);
+
+
+        return {
+            success: true,
+            insertId: result.insertId,
+            message: "User profile inserted successfully"
+        };
+
+    } catch (error) {
+        console.error("Insert Error:", error);
+
+        return {
+            success: false,
+            insertId: null,
+            message: "Failed to insert user profile",
+            error: error.message
+        };
+    }
 }
 
 // -----------------------
