@@ -71,3 +71,81 @@
     }
   }
 ]
+
+
+## Table Generateor
+{
+  "entity": "tenderItems",
+  "columns": [
+    {
+      "name": "itemName",
+      "label": "Item Name",
+      "type": "text",
+      "sortable": true,
+      "filterable": true
+    },
+    {
+      "name": "specification",
+      "label": "Specification",
+      "type": "text",
+      "sortable": true,
+      "filterable": true
+    },
+    {
+      "name": "quantity",
+      "label": "quantity",
+      "type": "text",
+      "sortable": true,
+      "filterable": true
+    },
+    {
+      "name": "doj",
+      "label": "Joining Date",
+      "type": "date",
+      "sortable": true,
+      "filterable": true
+    },
+    {
+      "name": "doj",
+      "label": "Joining Month",
+      "type": "date",
+      "sortable": true,
+      "filterable": true
+    },
+    {
+      "name": "doj",
+      "label": "Joining Year",
+      "type": "date",
+      "sortable": true,
+      "filterable": true
+    },
+    {
+      "name": "designation",
+      "label": "Designation",
+      "type": "text",
+      "sortable": true,
+      "filterable": true
+    },
+    {
+      "name": "department",
+      "label": "Department",
+      "type": "text",
+      "sortable": true,
+      "filterable": true
+    },
+    {
+      "name": "workingStatus",
+      "label": "Working Status",
+      "type": "text",
+      "sortable": true,
+      "filterable": true
+    },
+    {
+      "name": "dateOfExit",
+      "label": "Date of Exit",
+      "type": "date",
+      "sortable": true,
+      "filterable": false      
+    }
+  ]
+}

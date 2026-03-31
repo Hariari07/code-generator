@@ -1,0 +1,75 @@
+{
+  "entity": "tenders",
+  "columns": [
+    {
+      "name": "id",
+      "label": "Id",
+      "type": "number",
+      "sortable": true,
+      "filterable": true
+    },
+    {
+      "name": "companyId",
+      "label": "Company Id",
+      "type": "number",
+      "sortable": true,
+      "filterable": true
+    },
+    {
+      "name": "subCategoryId",
+      "label": "Sub Category Id",
+      "type": "number",
+      "sortable": true,
+      "filterable": true
+    },
+    {
+      "name": "tittle",
+      "label": "Tittle",
+      "type": "text",
+      "sortable": true,
+      "filterable": true
+    },
+    {
+      "name": "description",
+      "label": "Description",
+      "type": "text",
+      "sortable": true,
+      "filterable": true
+    },
+    {
+      "name": "location",
+      "label": "Location",
+      "type": "text",
+      "sortable": true,
+      "filterable": true
+    },
+    {
+      "name": "deadLine",
+      "label": "Dead Line",
+      "type": "datetime",
+      "sortable": true,
+      "filterable": true
+    },
+    {
+      "name": "tenderStatus",
+      "label": "Tender Status",
+      "type": "text",
+      "sortable": true,
+      "filterable": true
+    },
+    {
+      "name": "createdAt",
+      "label": "Created At",
+      "type": "datetime",
+      "sortable": true,
+      "filterable": true
+    },
+    {
+      "name": "updatedAt",
+      "label": "Updated At",
+      "type": "datetime",
+      "sortable": true,
+      "filterable": true
+    }
+  ]
+}

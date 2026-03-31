@@ -25,6 +25,8 @@ tables.forEach((table) => {
   if (!fs.existsSync(tableOutputDir))
     fs.mkdirSync(tableOutputDir, { recursive: true });
 
+  const modelFields = fields.filter((f) => f !== primaryKey);
+
   // ======================================================
   // MODEL
   // ======================================================

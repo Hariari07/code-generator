@@ -1,0 +1,113 @@
+<p-table #tables [value]="tendersData" stripedRows="true" [paginator]="true" [rows]="20"
+         [totalRecords]="totalRecords" [lazy]="true" (onLazyLoad)="loadTenders($event)"
+         [loading]="loading" [scrollable]="true" scrollHeight="480px" [rowHover]="true"
+         [rowsPerPageOptions]="[20, 40, 60, 80, 100, 200, 500, 1000, 2000]"
+         emptyMessage="No records found matching your filters">
+  <ng-template pTemplate="header">
+    <tr>
+
+          <th pSortableColumn="id" class="myStyleHeader ">
+            <div class="flex justify-content-between align-items-center">
+              Id
+              <p-sortIcon field="id"></p-sortIcon>
+              <p-columnFilter type="text" field="id" display="menu" class="ml-auto"></p-columnFilter>
+            </div>
+          </th>
+
+          <th pSortableColumn="companyId" class="myStyleHeader ">
+            <div class="flex justify-content-between align-items-center">
+              CompanyId
+              <p-sortIcon field="companyId"></p-sortIcon>
+              <p-columnFilter type="text" field="companyId" display="menu" class="ml-auto"></p-columnFilter>
+            </div>
+          </th>
+
+          <th pSortableColumn="subCategoryId" class="myStyleHeader ">
+            <div class="flex justify-content-between align-items-center">
+              SubCategoryId
+              <p-sortIcon field="subCategoryId"></p-sortIcon>
+              <p-columnFilter type="text" field="subCategoryId" display="menu" class="ml-auto"></p-columnFilter>
+            </div>
+          </th>
+
+          <th pSortableColumn="tittle" class="myStyleHeader ">
+            <div class="flex justify-content-between align-items-center">
+              Tittle
+              <p-sortIcon field="tittle"></p-sortIcon>
+              <p-columnFilter type="text" field="tittle" display="menu" class="ml-auto"></p-columnFilter>
+            </div>
+          </th>
+
+          <th pSortableColumn="description" class="myStyleHeader ">
+            <div class="flex justify-content-between align-items-center">
+              Description
+              <p-sortIcon field="description"></p-sortIcon>
+              <p-columnFilter type="text" field="description" display="menu" class="ml-auto"></p-columnFilter>
+            </div>
+          </th>
+
+          <th pSortableColumn="location" class="myStyleHeader ">
+            <div class="flex justify-content-between align-items-center">
+              Location
+              <p-sortIcon field="location"></p-sortIcon>
+              <p-columnFilter type="text" field="location" display="menu" class="ml-auto"></p-columnFilter>
+            </div>
+          </th>
+
+          <th pSortableColumn="deadLine" class="myStyleHeader ">
+            <div class="flex justify-content-between align-items-center">
+              DeadLine
+              <p-sortIcon field="deadLine"></p-sortIcon>
+              <p-columnFilter type="text" field="deadLine" display="menu" class="ml-auto"></p-columnFilter>
+            </div>
+          </th>
+
+          <th pSortableColumn="tenderStatus" class="myStyleHeader ">
+            <div class="flex justify-content-between align-items-center">
+              TenderStatus
+              <p-sortIcon field="tenderStatus"></p-sortIcon>
+              <p-columnFilter type="text" field="tenderStatus" display="menu" class="ml-auto"></p-columnFilter>
+            </div>
+          </th>
+
+          <th pSortableColumn="createdAt" class="myStyleHeader ">
+            <div class="flex justify-content-between align-items-center">
+              CreatedAt
+              <p-sortIcon field="createdAt"></p-sortIcon>
+              <p-columnFilter type="text" field="createdAt" display="menu" class="ml-auto"></p-columnFilter>
+            </div>
+          </th>
+
+          <th pSortableColumn="updatedAt" class="myStyleHeader ">
+            <div class="flex justify-content-between align-items-center">
+              UpdatedAt
+              <p-sortIcon field="updatedAt"></p-sortIcon>
+              <p-columnFilter type="date" field="updatedAt" display="menu" class="ml-auto"></p-columnFilter>
+            </div>
+          </th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-product>
+    <tr class="wrapText">
+          <td>{{ product.id }}</td>
+          <td>{{ product.companyId }}</td>
+          <td>{{ product.subCategoryId }}</td>
+          <td>{{ product.tittle }}</td>
+          <td>{{ product.description }}</td>
+          <td>{{ product.location }}</td>
+          <td>{{ product.deadLine }}</td>
+          <td>{{ product.tenderStatus }}</td>
+          <td>{{ product.createdAt }}</td>
+          <td>{{ product.updatedAt | date:'dd/MM/yyyy' }}</td>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="10" class="text-center" style="font-weight: bolder;">
+        No records found. Please try filtering with different values.
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

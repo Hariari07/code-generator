@@ -1,126 +1,78 @@
 [
   {
-    "tableName": "userProfile",
-    "dbName": "hlmmasters",
+    "tableName": "tenderItems",
+    "dbName": "default",
     "primaryKey": "id",
     "fields": [
-      "userId",
-      "companyName",
-      "address1",
-      "address2",
-      "city",
-      "state",
-      "country",
-      "pinCode",
-      "latitude",
-      "longitude",
-      "contactNo",
-      "emailid",
-      "currencyCode",
-      "profileImageUrl"
+      "id",
+      "tenderId",
+      "itemName",
+      "specification",
+      "quantity",
+      "unitId",
+      "remarks",
+      "createdAt",
+      "updatedAt"
     ],
-    "frontEndCommanUrl": "/hr/master/emp",
+    "frontEndCommanUrl": "/tender/",
     "frontend": {
-      "formName": "userProfileForm",
-      "columns": 1,
+      "formName": "tenderItemsForm",
+      "columns": 2,
       "fields": [
         {
-          "fieldName": "userId",
-          "label": "User Id",
-          "type": "number",
-          "primengModule": "InputNumber",
-          "required": true
-        },
-        {
-          "fieldName": "companyName",
-          "label": "Company Name",
+          "fieldName": "tenderId",
+          "label": "Tender Id",
           "type": "text",
           "primengModule": "InputText",
           "required": true
         },
         {
-          "fieldName": "address1",
-          "label": "Address1",
+          "fieldName": "itemName",
+          "label": "Item Name",
           "type": "text",
           "primengModule": "InputText",
           "required": true
         },
         {
-          "fieldName": "address2",
-          "label": "Address2",
+          "fieldName": "specification",
+          "label": "Specification",
           "type": "text",
           "primengModule": "InputText",
           "required": true
         },
         {
-          "fieldName": "city",
-          "label": "City",
+          "fieldName": "quantity",
+          "label": "Quantity",
           "type": "text",
           "primengModule": "InputText",
           "required": true
         },
         {
-          "fieldName": "state",
-          "label": "State",
+          "fieldName": "unitId",
+          "label": "Unit Id",
           "type": "text",
           "primengModule": "InputText",
           "required": true
         },
         {
-          "fieldName": "country",
-          "label": "Country",
-          "type": "text",
-          "primengModule": "Select",
-          "required": true,
-          "options": ["default"]
-        },
-        {
-          "fieldName": "pinCode",
-          "label": "Pin Code",
-          "type": "number",
-          "primengModule": "InputNumber",
-          "required": true
-        },
-        {
-          "fieldName": "latitude",
-          "label": "Latitude",
+          "fieldName": "remarks",
+          "label": "Remarks",
           "type": "text",
           "primengModule": "InputText",
           "required": true
         },
         {
-          "fieldName": "longitude",
-          "label": "Longitude",
+          "fieldName": "createdAt",
+          "label": "Created At",
           "type": "text",
           "primengModule": "InputText",
           "required": true
         },
         {
-          "fieldName": "contactNo",
-          "label": "Contact No",
-          "type": "number",
-          "primengModule": "InputNumber",
-          "required": true
-        },
-        {
-          "fieldName": "emailid",
-          "label": "Emailid",
-          "type": "email",
-          "primengModule": "InputText",
-          "required": true
-        },
-        {
-          "fieldName": "currencyCode",
-          "label": "Currency Code",
-          "type": "number",
-          "primengModule": "InputNumber",
-          "required": true
-        },
-        {
-          "fieldName": "profileImageUrl",
-          "label": "Profile Image Url",
-          "type": "text",
-          "primengModule": "InputText",
+          "fieldName": "updatedAt",
+          "label": "Updated At",
+          "type": "date",
+          "primengModule": "DatePicker",
           "required": true
         }
       ]

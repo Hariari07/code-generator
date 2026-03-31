@@ -1,17 +1,13 @@
-CREATE TABLE IF NOT EXISTS `hlmmasters`.`userProfile` (  
-  `userId` BIGINT UNSIGNED NULL,
-  `companyName` VARCHAR(150) NULL,
-  `address1` VARCHAR(150) NULL,
-  `address2` VARCHAR(150) NULL,
-  `city` VARCHAR(100) NULL,
-  `state` VARCHAR(100) NULL,
-  `country` VARCHAR(100) NULL,
-  `pinCode` VARCHAR(10) NULL,
-  `latitude` DECIMAL(10,8) NULL,
-  `longitude` DECIMAL(11,8) NULL,
-  `contactNo` VARCHAR(15) NULL,
-  `emailid` VARCHAR(150) NULL DEFAULT NULL,
-  `currencyCode` VARCHAR(10) NULL,
-  `profileImageUrl` VARCHAR(255) NULL DEFAULT NULL,  
+CREATE TABLE IF NOT EXISTS `default`.`tenders` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `companyId` BIGINT NULL,
+  `subCategoryId` BIGINT NULL,
+  `tittle` VARCHAR(255) NULL,
+  `description` LONGTEXT NULL,
+  `location` VARCHAR(100) NULL,
+  `deadLine` DATETIME NULL,
+  `tenderStatus` VARCHAR(45) NULL DEFAULT 'OPEN',
+  `createdAt` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB

@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 // NOTE Change the url frontend as per requirement
-const frotEndUrl = "/hr/master/emp";
+const frotEndUrl = "/tender/";
 
 const sqlFile = path.join(__dirname, "../sqlCode/table.sql");
 const sqlText = fs.readFileSync(sqlFile, "utf-8");

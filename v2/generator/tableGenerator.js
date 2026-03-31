@@ -3,18 +3,55 @@
 const fs = require('fs');
 const path = require('path');
 
-// Load JSON config
-const config = JSON.parse(fs.readFileSync('../inputs/tableinput.json', 'utf8'));
-const entity = config.entity;
-const columns = config.columns;
-const EntityName = entity.charAt(0).toUpperCase() + entity.slice(1);
+// ---------- CONFIG ----------
 
-// ensure directories
-const ensureDir = (p) => {
-  if (!fs.existsSync(p)) fs.mkdirSync(p, { recursive: true });
+// SQL input file
+const sqlFile = path.join(__dirname, "../sqlCode/table.sql");
+
+// Output directories
+const outputDir = path.join(__dirname, "../outputs/table");
+const backendDir = path.join(outputDir, "backend");
+const frontendDir = path.join(outputDir, "frontend");
+
+// ---------- UTILITIES ----------
+
+// Ensure directory exists
+const ensureDir = (dir) => {
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 };
 
-// BACKEND TEMPLATES
+// Convert SQL CREATE TABLE to JSON columns
+function sqlToJsonColumns(sql) {
+  const tableMatch = sql.match(/CREATE TABLE IF NOT EXISTS `.*`\.`(.*)`/i);
+  const entity = tableMatch ? tableMatch[1] : 'unknown_table';
+
+  const columnsMatch = sql.match(/\(([\s\S]*?)\)\s*ENGINE/i);
+  if (!columnsMatch) return null;
+
+  const columnsDef = columnsMatch[1];
+  const columnLines = columnsDef.split(/,(?![^(]*\))/);
+
+  const columns = [];
+
+  columnLines.forEach(line => {
+    line = line.trim();
+    if (/^(PRIMARY|UNIQUE|FOREIGN|KEY)/i.test(line)) return;
+
+    const parts = line.split(/\s+/);
+    const colName = parts[0].replace(/`/g, '');
+    columns.push(colName);
+  });
+
+  return { entity, columns };
+}
+
+// ---------- READ SQL FILE ----------
+const sqlCode = fs.readFileSync(sqlFile, 'utf8');
+const { entity, columns } = sqlToJsonColumns(sqlCode);
+const EntityName = entity.charAt(0).toUpperCase() + entity.slice(1);
+
+// ---------- BACKEND TEMPLATES ----------
+
 const modelContent = `
 const pool = require('../db');
 
@@ -32,6 +69,7 @@ class ${EntityName}Model {
         return rows[0];
     }
 }
+
 module.exports = ${EntityName}Model;
 `.trim();
 
@@ -47,6 +85,7 @@ class ${EntityName}Service {
         return await ${EntityName}Model.getById(id);
     }
 }
+
 module.exports = ${EntityName}Service;
 `.trim();
 
@@ -66,9 +105,7 @@ class ${EntityName}Controller {
     static async getOne(req, res) {
         try {
             const { id } = req.body;
-            if(!id){
-                return res.status(400).json({error: "id missing"});
-            }
+            if(!id) return res.status(400).json({error: "id missing"});
             const data = await ${EntityName}Service.getById(id);
             return res.json(data);
         } catch(e){
@@ -76,6 +113,7 @@ class ${EntityName}Controller {
         }
     }
 }
+
 module.exports = ${EntityName}Controller;
 `.trim();
 
@@ -90,9 +128,8 @@ router.post('/getOne', ${EntityName}Controller.getOne);
 module.exports = router;
 `.trim();
 
-//
-// FRONTEND TEMPLATES
-//
+// ---------- FRONTEND TEMPLATES ----------
+
 const interfaceContent = `
 export interface ${EntityName} {
 ${columns.map(c => `  ${c}: any;`).join('\n')}
@@ -118,39 +155,56 @@ export class ${EntityName}Service {
 }
 `.trim();
 
-//
-// P-TABLE (clean header, no class)
-//
-const pTableHeaderRow = columns.map(c =>
-`      <th pSortableColumn="${c}">
-        ${c}
-        <p-sortIcon field="${c}"></p-sortIcon>
-      </th>`
-).join('\n');
+// ---------- P-TABLE HTML ----------
 
-const pTableBodyRow = columns.map(c =>
-`      <td>{{row.${c}}}</td>`
-).join('\n');
+const pTableHeaderRow = columns.map(c => {
+  const filterType = /date|time/i.test(c) ? 'date' : 'text';
+  const colClass = /msg|justify/i.test(c) ? 'c-400' : '';
+  return `
+          <th pSortableColumn="${c}" class="myStyleHeader ${colClass}">
+            <div class="flex justify-content-between align-items-center">
+              ${c.charAt(0).toUpperCase() + c.slice(1)}
+              <p-sortIcon field="${c}"></p-sortIcon>
+              <p-columnFilter type="${filterType}" field="${c}" display="menu" class="ml-auto"></p-columnFilter>
+            </div>
+          </th>`;
+}).join('\n');
+
+const pTableBodyRow = columns.map(c => {
+  if (/date|time/i.test(c)) return `          <td>{{ product.${c} | date:'dd/MM/yyyy' }}</td>`;
+  return `          <td>{{ product.${c} }}</td>`;
+}).join('\n');
 
 const tableComponentHtml = `
-<p-table [value]="${entity}Data" [scrollable]="true" scrollHeight="450px">
+<p-table #tables [value]="${entity}Data" stripedRows="true" [paginator]="true" [rows]="20"
+         [totalRecords]="totalRecords" [lazy]="true" (onLazyLoad)="load${EntityName}($event)"
+         [loading]="loading" [scrollable]="true" scrollHeight="480px" [rowHover]="true"
+         [rowsPerPageOptions]="[20, 40, 60, 80, 100, 200, 500, 1000, 2000]"
+         emptyMessage="No records found matching your filters">
   <ng-template pTemplate="header">
     <tr>
 ${pTableHeaderRow}
     </tr>
   </ng-template>
 
-  <ng-template pTemplate="body" let-row>
-    <tr>
+  <ng-template pTemplate="body" let-product>
+    <tr class="wrapText">
 ${pTableBodyRow}
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="${columns.length}" class="text-center" style="font-weight: bolder;">
+        No records found. Please try filtering with different values.
+      </td>
     </tr>
   </ng-template>
 </p-table>
 `.trim();
 
-//
-// Angular Component
-//
+// ---------- ANGULAR COMPONENT ----------
+
 const tableComponentTs = `
 import { Component, OnInit } from '@angular/core';
 import { ${EntityName}Service } from './${entity}.service';
@@ -162,68 +216,47 @@ import { ${EntityName} } from './${entity}.interface';
 })
 export class ${EntityName}TableComponent implements OnInit {
   ${entity}Data: ${EntityName}[] = [];
+  totalRecords = 0;
+  loading = false;
 
   constructor(private service: ${EntityName}Service){}
 
   ngOnInit(){
-    this.service.getAll().subscribe(data => this.${entity}Data = data);
+    this.load${EntityName}({ first:0, rows:20 });
   }
-}
-`.trim();
 
-const formControls = columns.map(c => `      ${c}: [''],`).join('\n');
-
-//
-// Dialog
-//
-const editDialogHtml = `
-<p-dialog [(visible)]="showEdit" header="Edit ${EntityName}" modal="true">
- <form [formGroup]="form">
-${columns.map(c => `  <input formControlName="${c}" placeholder="${c}" />`).join('\n')}
- </form>
-</p-dialog>
-`.trim();
-
-const editDialogTs = `
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-
-@Component({
- selector: 'app-${entity}-edit',
- templateUrl: './${entity}-edit.component.html'
-})
-export class ${EntityName}EditComponent {
-  form: FormGroup;
-  showEdit = false;
-
-  constructor(private fb: FormBuilder){
-    this.form = this.fb.group({
-${formControls}
+  load${EntityName}(event: any){
+    this.loading = true;
+    this.service.getAll().subscribe(data => {
+      this.${entity}Data = data;
+      this.totalRecords = data.length;
+      this.loading = false;
     });
   }
 }
 `.trim();
 
-//
-// WRITE FILES
-//
-ensureDir('../outputs/table/backend/models');
-ensureDir('../outputs/table/backend/services');
-ensureDir('../outputs/table/backend/controllers');
-ensureDir('../outputs/table/backend/routes');
+// ---------- WRITE FILES ----------
 
-fs.writeFileSync(`../outputs/table/backend/models/${entity}.model.js`, modelContent);
-fs.writeFileSync(`../outputs/table/backend/services/${entity}.service.js`, serviceContent);
-fs.writeFileSync(`../outputs/table/backend/controllers/${entity}.controller.js`, controllerContent);
-fs.writeFileSync(`../outputs/table/backend/routes/${entity}.routes.js`, routesContent);
+// Backend directories
+ensureDir(path.join(backendDir, 'models'));
+ensureDir(path.join(backendDir, 'services'));
+ensureDir(path.join(backendDir, 'controllers'));
+ensureDir(path.join(backendDir, 'routes'));
 
-// frontend
-ensureDir('../outputs/table/frontend');
-fs.writeFileSync(`../outputs/table/frontend/${entity}.interface.ts`, interfaceContent);
-fs.writeFileSync(`../outputs/table/frontend/${entity}.service.ts`, frontendServiceContent);
-fs.writeFileSync(`../outputs/table/frontend/${entity}-table.component.html`, tableComponentHtml);
-fs.writeFileSync(`../outputs/table/frontend/${entity}-table.component.ts`, tableComponentTs);
-fs.writeFileSync(`../outputs/table/frontend/${entity}-edit.component.html`, editDialogHtml);
-fs.writeFileSync(`../outputs/table/frontend/${entity}-edit.component.ts`, editDialogTs);
+// Frontend directory
+ensureDir(frontendDir);
 
-console.log('Generation completed successfully');
+// Backend files
+fs.writeFileSync(path.join(backendDir, `models/${entity}.model.js`), modelContent);
+fs.writeFileSync(path.join(backendDir, `services/${entity}.service.js`), serviceContent);
+fs.writeFileSync(path.join(backendDir, `controllers/${entity}.controller.js`), controllerContent);
+fs.writeFileSync(path.join(backendDir, `routes/${entity}.routes.js`), routesContent);
+
+// Frontend files
+fs.writeFileSync(path.join(frontendDir, `${entity}.interface.ts`), interfaceContent);
+fs.writeFileSync(path.join(frontendDir, `${entity}.service.ts`), frontendServiceContent);
+fs.writeFileSync(path.join(frontendDir, `${entity}-table.component.html`), tableComponentHtml);
+fs.writeFileSync(path.join(frontendDir, `${entity}-table.component.ts`), tableComponentTs);
+
+console.log("Generation completed successfully!");
